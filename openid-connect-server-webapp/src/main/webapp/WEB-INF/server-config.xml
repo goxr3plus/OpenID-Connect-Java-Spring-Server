@@ -47,10 +47,13 @@
 <!--        <property name="regTokenLifeTime" value="44" /> -->
         
         <!--The maximum amount of time a Refresh Token is allowed to live-->
-        <property name="maximumRefreshTokenLifeTime" value="50" />       
+        <property name="maximumRefreshTokenLifeTime" value="300" />       
         
         <!--The maximum amount of time an Access Token is allowed to live-->
-        <property name="maximumAccessTokenLifeTime" value="20" /> 
+        <property name="maximumAccessTokenLifeTime" value="400" /> 
+        
+        <!--The maximum amount of time an Access Token is allowed to live-->
+        <property name="maximumIdTokenLifeTime" value="500" /> 
         
         	
         <!-- This property forces the issuer value to start with "https", recommended on production servers -->

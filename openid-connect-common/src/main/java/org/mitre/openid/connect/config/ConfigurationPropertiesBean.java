@@ -57,6 +57,8 @@ public class ConfigurationPropertiesBean {
 
     private Long maximumAccessTokenLifeTime;
 
+    private Long maximumIdTokenLifeTime;
+
     private Long regTokenLifeTime;
 
     private Long rqpTokenLifeTime;
@@ -288,5 +290,19 @@ public class ConfigurationPropertiesBean {
      */
     public void setMaximumAccessTokenLifeTime(Long maximumAccessTokenLifeTime) {
         this.maximumAccessTokenLifeTime = maximumAccessTokenLifeTime;
+    }
+
+    /**
+     * @return the maximumIdTokenLifeTime
+     */
+    public Long getMaximumIdTokenLifeTime() {
+        return maximumIdTokenLifeTime;
+    }
+
+    /**
+     * @param maximumIdTokenLifeTime the maximumIdTokenLifeTime to set
+     */
+    public void setMaximumIdTokenLifeTime(Long maximumIdTokenLifeTime) {
+        this.maximumIdTokenLifeTime = maximumIdTokenLifeTime;
     }
 }

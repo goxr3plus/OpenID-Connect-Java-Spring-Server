@@ -78,6 +78,16 @@
             }
 
 
+            function getIdTokenMaximumValidityTime() {
+                return parseInt(${config.maximumIdTokenLifeTime});
+            }
+
+
+            function getIdTokenMinimumValidityTime() {
+                return 0;
+            }
+
+
             // get the authorities of the current user, if available (null otherwise)
             function getUserAuthorities() {
                 return ${userAuthorities};

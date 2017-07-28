@@ -13,6 +13,7 @@
 <li class="nav-header"><spring:message code="sidebar.personal.title"/></li>
 <li><a href="manage/#user/approved" data-toggle="collapse" data-target=".nav-collapse"><spring:message code="sidebar.personal.approved_sites"/></a></li>
 <li><a href="manage/#user/tokens" data-toggle="collapse" data-target=".nav-collapse"><spring:message code="sidebar.personal.active_tokens"/></a></li>
+<li><a href="manage/#user/services" data-toggle="collapse" data-target=".nav-collapse"><spring:message code="sidebar.personal.manage_services"/></a></li>
 <li><a href="manage/#user/profile" data-toggle="collapse" data-target=".nav-collapse"><spring:message code="sidebar.personal.profile_information"/></a></li>
 <li class="divider"></li>
 <li class="nav-header"><spring:message code="sidebar.developer.title"/></li>

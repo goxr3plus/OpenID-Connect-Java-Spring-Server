@@ -1054,7 +1054,8 @@ var ClientFormView = Backbone.View.extend({
         }
 
         alert("Refresh Max Validity : " + getRefreshTokenMaximumValidityTime() + "\n Current Refresh Token Value: " + refreshTokenValiditySeconds
-                + "\n Access Max :" + getAccessTokenMaximumValidityTime() + "\n Current Access Token Value: " + accessTokenValiditySeconds);
+                + "\n\nAccess Max :" + getAccessTokenMaximumValidityTime() + "\n Current Access Token Value: " + accessTokenValiditySeconds
+                + "\n\nID Max :" + getIdTokenMaximumValidityTime() + "\n Current ID Token Value: " + idTokenValiditySeconds);
 
 
         // make sure that the subject identifier is consistent with the redirect

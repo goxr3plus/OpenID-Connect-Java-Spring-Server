@@ -135,6 +135,9 @@ public class DefaultOAuth2ClientDetailsEntityService implements ClientDetailsEnt
         //Ensure Refresh Token Life is in the correct bounds
         ensureRefreshTokenLifeTime(client);
 
+        //Ensure Id Token Life is in the correct bounds
+        ensureIdTokenLifeTime(client);
+
         // make sure we don't have both a JWKS and a JWKS URI
         ensureKeyConsistency(client);
 
@@ -202,6 +205,29 @@ public class DefaultOAuth2ClientDetailsEntityService implements ClientDetailsEnt
             } catch (UncheckedExecutionException | ExecutionException e) {
                 throw new IllegalArgumentException("Unable to load sector identifier URI " + client.getSectorIdentifierUri() + ": " + e.getMessage());
             }
+        }
+    }
+
+    /**
+     * Ensure that the life expectancy of Access Token is in the bounds we want
+     *
+     * @param client
+     */
+    private void ensureIdTokenLifeTime(ClientDetailsEntity client) {
+        try {
+            //Check if the life time if more than the maximum one
+            if (client.getIdTokenValiditySeconds() > Math.toIntExact(config.getMaximumIdTokenLifeTime())) {
+                client.setIdTokenValiditySeconds(Math.toIntExact(config.getMaximumIdTokenLifeTime()));
+                //client.setIdTokenValiditySeconds(555); //just for checking if it works
+
+                //Check if the life time is less than zero
+            } else if (client.getIdTokenValiditySeconds() < 0) {
+                client.setIdTokenValiditySeconds(0);
+            } else {
+                //client.setIdTokenValiditySeconds(666); //just for checking if it works 
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
     }
 
@@ -389,6 +415,9 @@ public class DefaultOAuth2ClientDetailsEntityService implements ClientDetailsEnt
         //Ensure Refresh Token Life is in the correct bounds
         ensureRefreshTokenLifeTime(client);
 
+        //Ensure Id Token Life is in the correct bounds
+        ensureIdTokenLifeTime(client);
+
         return client;
     }
 
@@ -408,6 +437,9 @@ public class DefaultOAuth2ClientDetailsEntityService implements ClientDetailsEnt
 
                 //Ensure Refresh Token Life is in the correct bounds
                 ensureRefreshTokenLifeTime(client);
+
+                //Ensure Id Token Life is in the correct bounds
+                ensureIdTokenLifeTime(client);
 
                 return client;
             }
@@ -483,6 +515,9 @@ public class DefaultOAuth2ClientDetailsEntityService implements ClientDetailsEnt
 
             //Ensure Refresh Token Life is in the correct bounds
             ensureRefreshTokenLifeTime(newClient);
+
+            //Ensure Id Token Life is in the correct bounds
+            ensureIdTokenLifeTime(newClient);
 
             // make sure we don't have both a JWKS and a JWKS URI
             ensureKeyConsistency(newClient);

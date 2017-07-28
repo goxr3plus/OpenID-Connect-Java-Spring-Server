@@ -39,10 +39,11 @@
 				<value>resources/js/scope.js</value>
 				<value>resources/js/whitelist.js</value>
 				<value>resources/js/dynreg.js</value>
-				<value>resources/js/rsreg.js</value>
-				<value>resources/js/token.js</value>
+				<value>resources/js/rsreg.js</value>                                                           
+				<value>resources/js/token.js</value>                           
 				<value>resources/js/blacklist.js</value>
 				<value>resources/js/profile.js</value>
+                                <value>resources/js/services.js</value>
 			</set>
 		</property>
 		
