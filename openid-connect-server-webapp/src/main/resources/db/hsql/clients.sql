@@ -25,7 +25,8 @@ INSERT INTO client_scope_TEMP (owner_id, scope) VALUES
 INSERT INTO client_redirect_uri_TEMP (owner_id, redirect_uri) VALUES
 	('client', 'http://localhost/'),
 	('client', 'http://localhost:8080/'),
-        ('client', 'http://localhost/jsApp/popup.html');
+        ('client', 'http://localhost/jsApp/popup.html'),
+        ('client', 'http://localhost:8080/simple-web-app/openid_connect_login');
 	
 INSERT INTO client_grant_type_TEMP (owner_id, grant_type) VALUES
 	('client', 'authorization_code'),
@@ -49,7 +50,8 @@ INSERT INTO client_scope_TEMP (owner_id, scope) VALUES
 INSERT INTO client_redirect_uri_TEMP (owner_id, redirect_uri) VALUES
 	('client2', 'http://localhost/'),
 	('client2', 'http://localhost:8080/'),
-        ('client2', 'http://localhost/jsApp/popup.html');
+        ('client2', 'http://localhost/jsApp/popup.html'),
+        ('client2', 'http://localhost:8080/simple-web-app/openid_connect_login');
 	
 INSERT INTO client_grant_type_TEMP (owner_id, grant_type) VALUES
 	('client2', 'authorization_code'),
@@ -74,7 +76,8 @@ INSERT INTO client_scope_TEMP (owner_id, scope) VALUES
 INSERT INTO client_redirect_uri_TEMP (owner_id, redirect_uri) VALUES
 	('client3', 'http://localhost/'),
 	('client3', 'http://localhost:8080/'),
-        ('client3', 'http://localhost/jsApp/popup.html');
+        ('client3', 'http://localhost/jsApp/popup.html'),
+        ('client3', 'http://localhost:8080/simple-web-app/openid_connect_login');
 	
 INSERT INTO client_grant_type_TEMP (owner_id, grant_type) VALUES
 	('client3', 'authorization_code'),

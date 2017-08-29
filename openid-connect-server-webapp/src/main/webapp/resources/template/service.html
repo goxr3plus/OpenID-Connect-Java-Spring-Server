@@ -1,0 +1,186 @@
+<!-- 
+ Copyright 2017 The MIT Internet Trust Consortium
+ 
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+ 
+   http://www.apache.org/licenses/LICENSE-2.0
+ 
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+ 
+ <script type="text/html" id="tmpl-service-table">
+    <div class="well well-small">
+		<button class="btn btn-small refresh-table"><i class="icon-refresh"></i> <span data-i18n="common.refresh">Refresh</span></button> &nbsp;
+		<div class="form-search pull-right">
+			<div class="input-append">
+				<input type="text" class="search-query" placeholder="Search..." data-i18n="[placeholder]service.service-table.search">
+				<button class="btn">&times;</button>
+			</div>
+		</div>
+    </div>
+
+	<div>
+		<div><p data-i18n="service.service-table.text">Access tokens are usually short-lived and provide services with access to specific resources. ID Tokens are specialized access tokens to facilitate log on using OpenID Connect. Refresh tokens are usually long-lived and provide services with the ability to get new access tokens without end-user involvement.</p></div>
+
+		<div id="service-table-empty" class="alert alert-info" data-i18n="service.service-table.no-service">
+			There are no services.
+		</div>
+
+		<div id="service-table-search-empty" class="alert alert-warning" data-i18n="service.service-table.no-matches">
+			There are no services that match your search criteria.
+		</div>
+
+		<div class="pagination paginator-refresh"></div>
+
+	    <table id="service-table" class="table table-hover table-striped">
+	        <thead>
+	        <tr>
+	            <th data-i18n="common.service">Service</th>
+	        </tr>
+	        </thead>
+	        <tbody>
+	        </tbody>
+	    </table>
+
+		<div class="pagination paginator-refresh"></div>
+
+	</div>
+
+    <div class="well well-small">
+		<button class="btn btn-small refresh-table"><i class="icon-refresh"></i> <span data-i18n="common.refresh">Refresh</span></button> &nbsp; 
+    </div>
+</script>
+
+<script type="text/html" id="tmpl-service-client">
+    <td style="width: 70px;">
+        <div class="row-fluid">
+            <div class="span2">
+                <span class="pull-left"><img src=" <%- service.logoUri != null ? service.logoUri : 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/300px-No_image_available.svg.png' %>" class="media-object client-logo img-rounded" width="64" height="64"> </span>
+            </div>
+        </div>
+    </td>
+
+    <td>
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="row-fluid">
+                <div class="span10">
+                    <div>
+                        <span class="clientid-substring" title="<%- service.clientId %> (click to display client ID)"><%- service.clientName != null ? service.clientName : ( service.clientId.substr(0,8) + '...' ) %></span>
+                    </div>
+                    <div style="font-size: 85%; color: #999999;">
+                        <%- service.clientDescription != null ? service.clientDescription : 'Description' %>
+                    </div>
+                </div>
+        
+                <div class="span2">
+                    <button class="btn btn-danger btn-delete pull-right"><i class="icon-trash icon-white"></i> <span data-i18n="common.delete">Delete</span></button>
+                </div>
+                <div class="client-display-tokens span12" style="margin-left: 0px;">
+                    <div class="displayTokensContainer muted" style="padding-right: 29px;">
+                        <div class="toggleDisplayTokens" style="cursor: pointer;">
+                            <i class="icon-chevron-right"></i> <small> More Info</small>
+                        </div>
+                        <div id="display-tokens-list" class="displayTokens hide" style="display: none;">
+                            <table id="refresh-token-table" class="table table-hover table-bordered" style="margin-left: 21px;">
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>  
+                </div>
+            </div>
+        </div>
+    </div>
+    </td>
+
+</script>
+
+<script type="text/html" id="tmpl-service-token">
+    <td>
+        <div class="row-fluid">
+        <div class="span12">
+            <div class="row-fluid">
+                <div class="span12">
+                    <div>
+                        <% if (type == "refresh") { %>
+                        <span title="token type" style="cursor: default;">Refresh Token</span>
+                        <% } else { %>
+                        <span title="token type" style="cursor: default;">Access Token</span>
+                        <% } %>
+                    </div>
+                    <div class="token-value input-append">
+                        <input type="text" readonly style="cursor: text;" class="token-full js-copytextarea span7" value="<%- token.value %>" />
+                        <button style="cursor: pointer" class="btn btn-copy" data-toggle="tooltip" title="Copy to Clipboard"><i class="icon-file"></i> Copy</button>
+                        <button class="btn btn-danger btn-delete"><i class="icon-trash icon-white"></i> <span data-i18n="common.revoke">Revoke</span></button>
+                    </div>
+                    <div class="scope-description"></div>
+                    <div>
+                        <span>Expire: <%- formattedExpiration %></span>
+                    </div>
+                    
+                </div>
+                <div class="refresh-more-access-tokens span12" style="margin-left: 0px;">
+                    <div class="AccessTokensContainer muted" style="padding-right: 29px;">
+                        <div class="toggleAccessTokens" style="cursor: pointer;">
+                            <i class="icon-chevron-right"></i> <small>access tokens</small>
+                        </div>
+                        <div id="more-access-tokens-list" class="AccessTokens hide" style="display: none;">
+                            <table id="access-token-table" class="table table-hover table-bordered" style="margin-left: 21px;">
+                                <tbody>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>  
+                </div>
+            </div>
+        </div>
+        </div>
+    </td>
+
+</script>
+
+<script type="text/html" id="tmpl-service-associated-token">
+    <td>
+        <div class="row-fluid">
+        <div class="span12">
+            <div class="row-fluid">
+                <div class="span12">
+                    <div>
+                        <% if (type == "refresh") { %>
+                        <span title="token type" style="cursor: default;">Refresh Token</span>
+                        <% } else { %>
+                        <span title="token type" style="cursor: default;">Access Token</span>
+                        <% } %>
+                    </div>
+                    <div class="token-value input-append">
+                        <input type="text" readonly style="cursor: text;" class="token-full js-copytextarea span7" value="<%- token.value %>" />
+                        <button style="cursor: pointer" class="btn btn-copy"><i class="icon-file"></i> Copy</button>
+                        <button class="btn btn-danger btn-delete"><i class="icon-trash icon-white"></i> <span data-i18n="common.revoke">Revoke</span></button>
+                    </div>
+                    <div class="scope-description"></div>
+                    <div>
+                        <span>Issued: <%- formattedIssuedDate %></span><br>
+                        <span>Expire: <%- formattedExpiration %></span>
+                    </div>
+                </div>
+            
+            </div>
+        </div>
+        </div>
+    </td>
+
+</script>
+
+<script type="text/javascript">
+    var imported = document.createElement('script');
+    imported.src = 'resources/js/jwt-decode.js';
+    document.body.appendChild(imported);
+</script>
